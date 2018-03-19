@@ -20,7 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FaqActivity"></activity>
+        <activity android:name=".FaqActivity" />
+        <activity android:name=".AdvancedActivity"></activity>
     </application>
 
 </manifest>

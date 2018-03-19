@@ -11,13 +11,19 @@ public class Report {
     private String amount;
     private String formatted_timer;
     private String city;
+    private String number;
+    private String way;
+    private String otherinfo;
 
-    public Report(int id, String station, String amount, String formatted_timer, String city) {
+    public Report(int id, String station, String amount, String formatted_timer, String city, String number, String way, String otherinfo) {
         this.id = id;
         this.station = station;
         this.amount = amount;
         this.formatted_timer = formatted_timer;
         this.city = city;
+        this.number = number;
+        this.way = way;
+        this.otherinfo = otherinfo;
     }
 //test
     public int getId() {
@@ -39,6 +45,12 @@ public class Report {
     public String getCity() {
         return city;
     }
+
+    public String getNumber(){return number;}
+
+    public String getWay(){return way;}
+
+    public String getOtherinfo(){return otherinfo;}
 
 
 }

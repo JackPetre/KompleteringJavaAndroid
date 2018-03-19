@@ -59,7 +59,13 @@ public class MainActivity extends AppCompatActivity {
 
   } */
 
-    String antalKontrollanter = "Okänt";
+    String antalKontrollanter = "OkÃ¤nt";
+    String number = null;
+    String way = null;
+    String otherinfo = null;
+
+    // Ta ut unikt ID för användaren
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,41 +73,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        // Ta ut unikt ID för användaren
-        final String deviceId = Secure.getString(this.getContentResolver(),
+        final String deviceId = Secure.getString(getContentResolver(),
                 Secure.ANDROID_ID);
 
 
 
-        // Spinner meny
-        Spinner mySpinner = (Spinner) findViewById(R.id.spinner1);
-
-        ArrayAdapter < String > myAdapter = new ArrayAdapter < String > (MainActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.alternatives));
-        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mySpinner.setAdapter(myAdapter);
-
-        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView < ? > adapterView, View view, int i, long l) {
-                if (i == 0) {
-                    antalKontrollanter = "OkÃ¤nt";
-
-                } else if (i == 1) {
-
-                    antalKontrollanter = "1-2";
-                } else if (i == 2) {
-
-                    antalKontrollanter = "2-4";
-                } else if (i == 3) {
-
-                    antalKontrollanter = "4+";
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView < ? > adapterView) {
-
-            }
-        });
 
 
         // gps
@@ -117,6 +93,17 @@ public class MainActivity extends AppCompatActivity {
 
         reportList = new ArrayList < > ();
         loadReports();
+
+        //Get intent if it exists
+        final Intent intent;
+        intent = getIntent();
+        if(intent != null && intent.getExtras() != null){
+            Bundle b = intent.getExtras();
+            number = (String) b.get("number");
+            way = (String) b.get("way");
+            otherinfo = (String) b.get("otherinfo");
+
+        }
 
 
 
@@ -147,29 +134,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }.start();
 
-
                 double lat = 11;
                 double lon = 22;
-                GpsTracker gt = new GpsTracker(getApplicationContext());
-                Location l = gt.getLocation();
-                if (l == null) {
-                    Toast.makeText(getApplicationContext(), "GPS ger inget värde", Toast.LENGTH_SHORT).show();
-                } else {
-                    lat = l.getLatitude();
-                    lon = l.getLongitude();
-                    //Toast.makeText(getApplicationContext(),"GPS Lat = "+lat+"\n lon = "+lon,Toast.LENGTH_SHORT).show();
-                }
-                if (canPost == true){
-                reportButton reportButton = new reportButton();
-                reportButton.InsertData(lat, lon, deviceId, antalKontrollanter);
-
-                    Log.w("myApp", "Du postade!");
-                }
-
-                else {
-
-                    Log.w("myApp", "Du får fna inte psosta");
-                }
+                report(lat,lon,  deviceId,  antalKontrollanter,  number,  way,  otherinfo);
             }
         });
 
@@ -196,10 +163,44 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Advanced Button
+        Button advancedButton = findViewById(R.id.advancedButton);
+        advancedButton.setOnClickListener(new View.OnClickListener() {
 
+            public void onClick(View v) {
+
+                startAdvancedActivity();
+
+            }
+        });
 
 
     } // Oncreate stängs
+
+    public void report(double lat,double lon, String deviceId, String antalKontrollanter, String number, String way, String otherinfo){
+        lat = 11;
+        lon = 22;
+        GpsTracker gt = new GpsTracker(getApplicationContext());
+        Location l = gt.getLocation();
+        if (l == null) {
+            Toast.makeText(getApplicationContext(), "GPS ger inget värde. Sätt på platstjänst.", Toast.LENGTH_SHORT).show();
+        } else {
+            lat = l.getLatitude();
+            lon = l.getLongitude();
+            //Toast.makeText(getApplicationContext(),"GPS Lat = "+lat+"\n lon = "+lon,Toast.LENGTH_SHORT).show();
+        }
+            reportButton reportButton = new reportButton();
+            reportButton.InsertData(lat, lon, deviceId, antalKontrollanter, number, way, otherinfo);
+
+            Log.w("myApp", "Du postade!");
+
+    }
+
+
+    public void startAdvancedActivity() {
+        Intent intent = new Intent(this, AdvancedActivity.class);
+        startActivity(intent);
+    }
 
     public void startFaqActivity() {
         Intent intent = new Intent(this, FaqActivity.class);
@@ -225,7 +226,10 @@ public class MainActivity extends AppCompatActivity {
                                         report.getString("station"),
                                         report.getString("amount"),
                                         report.getString("formatted_timer"),
-                                        report.getString("city")
+                                        report.getString("city"),
+                                        report.getString("number"),
+                                        report.getString("way"),
+                                        report.getString("otherinfo")
                                 ));
                             }
 

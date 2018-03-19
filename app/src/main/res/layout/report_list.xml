@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:padding="8dp">
 
 
@@ -37,10 +37,38 @@
             android:layout_below="@+id/textViewCity"
             android:text="Timer" />
 
+        <TextView
+            android:id="@+id/textViewNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textViewTimer"
+            android:text=""
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+        <TextView
+            android:id="@+id/textViewWay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/textViewNumber"
+            android:layout_marginTop="12dp"
+            android:text=""
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+        <TextView
+            android:id="@+id/textViewOtherinfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:text=""
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
-            android:background="@android:color/darker_gray"/>
+            android:background="@android:color/darker_gray" />
 
     </RelativeLayout>
 

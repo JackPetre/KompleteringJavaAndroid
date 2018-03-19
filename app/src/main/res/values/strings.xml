@@ -1,15 +1,15 @@
 <resources>
     <string name="app_name">Kepsjakten</string>
 
-            <string name="FaqDescc">
+    <string name="FaqDescc">
                     Kepsjakten är en applikation där användare kan rapportera den hållplatsen som är närmast sig, för att på så sätt informera andra användare om kontrollanter och dess nuvarande plats. Genom att klicka på knappen "Rapportera" skickas en rapport in som andra sedan kan se. Om önskat kan även ett antal anges, vilket då syftar på antalet kontrollanter vid platsen.\n\nKepsjakten och dess skapare uppmuntrar varken dess användare att planka på spårvagn, buss el. dyl, eller att förfölja och trakassera de kontrollanter som endast gör sitt jobb.\n\nSe till att alltid ha en giltig biljett!
             </string>
 
-            <!-- spinner -->
-            <string-array name="alternatives">
-                <item>Ospecificerat Antal</item>
-                <item>1-2</item>
-                <item>3-4</item>
-                <item>4+</item>
-            </string-array>
+    <!-- spinner -->
+    <string-array name="alternatives">
+        <item>Ospecificerat Antal</item>
+        <item>1-2</item>
+        <item>3-4</item>
+        <item>4+</item>
+    </string-array>
 </resources>

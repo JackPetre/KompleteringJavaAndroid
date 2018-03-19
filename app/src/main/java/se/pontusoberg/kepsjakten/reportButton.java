@@ -39,7 +39,7 @@ public class reportButton extends AppCompatActivity {
 
 
 
-    public void InsertData(final double lat, final double lon, final String deviceId, final String kontrollAntal) {
+    public void InsertData(final double lat, final double lon, final String deviceId, final String kontrollAntal, final String number, final String way, final String otherinfo) {
         Log.i("ew", "Knappen funkar insertData");
         class SendPostReqAsyncTask extends AsyncTask < String, String, String > {
 
@@ -55,12 +55,17 @@ public class reportButton extends AppCompatActivity {
                 String kontrollAntal2 = kontrollAntal;
                 String kontrollKoll = kontrollAntal2;
 
+
+
                 List < NameValuePair > nameValuePairs = new ArrayList < NameValuePair > ();
 
                 nameValuePairs.add(new BasicNameValuePair("lat", StationHolder));
                 nameValuePairs.add(new BasicNameValuePair("lon", AmountHolder));
                 nameValuePairs.add(new BasicNameValuePair("deviceId", deviceId2));
                 nameValuePairs.add(new BasicNameValuePair("amount", kontrollKoll));
+                nameValuePairs.add(new BasicNameValuePair("number", number));
+                nameValuePairs.add(new BasicNameValuePair("way", way));
+                nameValuePairs.add(new BasicNameValuePair("otherinfo", otherinfo));
 
 
                 try {
