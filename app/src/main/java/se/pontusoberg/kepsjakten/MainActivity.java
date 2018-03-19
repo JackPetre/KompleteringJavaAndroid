@@ -4,10 +4,11 @@ package se.pontusoberg.kepsjakten;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
+import java.lang.Object;
 import android.Manifest;
 import android.content.Intent;
 import android.location.Location;
+import android.os.CountDownTimer;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,6 +42,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity {
+
+    Boolean canPost = true;
+    //Boolean firstPost = true;
 
     //JSON data url
     // ändra från Api.php
@@ -118,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Report Button
-        Button btn = findViewById(R.id.reportButton);
+        final Button btn = findViewById(R.id.reportButton);
 
         btn.setOnClickListener(new View.OnClickListener() {
 
@@ -127,23 +131,23 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                //Declare the timer
-                Timer myTimer = new Timer();
-                //Set the schedule function and rate
-                myTimer.scheduleAtFixedRate(new TimerTask() {
-                                                @Override
-                                                public void run() {
-                                                    //Called at every 1000 milliseconds (1 second)
-                                                    Log.i("MainActivity", "Repeated task");
-                                                }
-                                            },
-                        //set the amount of time in milliseconds before first execution
-                        0,
-                        //Set the amount of time between each execution (in milliseconds)
-                        1000);
+                new CountDownTimer(30000, 1000) {
+
+                    public void onTick(long millisUntilFinished) {
+                        Log.w("myApp", "en sekund");
+                       canPost = false;
+                       btn.setEnabled(false);
+                    }
+
+                    public void onFinish() {
+                        Log.w("myApp", "klar");
+                        canPost = true;
+                        btn.setEnabled(true);
+                        //firstPost = false;
+                    }
+                }.start();
 
 
-                
                 double lat = 11;
                 double lon = 22;
                 GpsTracker gt = new GpsTracker(getApplicationContext());
@@ -155,9 +159,17 @@ public class MainActivity extends AppCompatActivity {
                     lon = l.getLongitude();
                     //Toast.makeText(getApplicationContext(),"GPS Lat = "+lat+"\n lon = "+lon,Toast.LENGTH_SHORT).show();
                 }
-
+                if (canPost == true){
                 reportButton reportButton = new reportButton();
                 reportButton.InsertData(lat, lon, deviceId, antalKontrollanter);
+
+                    Log.w("myApp", "Du postade!");
+                }
+
+                else {
+
+                    Log.w("myApp", "Du får fna inte psosta");
+                }
             }
         });
 
