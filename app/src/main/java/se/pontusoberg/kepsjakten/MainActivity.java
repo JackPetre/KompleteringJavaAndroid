@@ -1,6 +1,10 @@
 package se.pontusoberg.kepsjakten;
 
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+
 import android.Manifest;
 import android.content.Intent;
 import android.location.Location;
@@ -122,6 +126,24 @@ public class MainActivity extends AppCompatActivity {
 
             public void onClick(View v) {
 
+
+                //Declare the timer
+                Timer myTimer = new Timer();
+                //Set the schedule function and rate
+                myTimer.scheduleAtFixedRate(new TimerTask() {
+                                                @Override
+                                                public void run() {
+                                                    //Called at every 1000 milliseconds (1 second)
+                                                    Log.i("MainActivity", "Repeated task");
+                                                }
+                                            },
+                        //set the amount of time in milliseconds before first execution
+                        0,
+                        //Set the amount of time between each execution (in milliseconds)
+                        1000);
+
+
+                
                 double lat = 11;
                 double lon = 22;
                 GpsTracker gt = new GpsTracker(getApplicationContext());
