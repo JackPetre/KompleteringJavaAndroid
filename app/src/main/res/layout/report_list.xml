@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="118dp"
         android:padding="8dp">
 
 
@@ -41,8 +41,9 @@
             android:id="@+id/textViewNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textViewTimer"
+            android:layout_alignBaseline="@+id/textViewTimer"
+            android:layout_alignBottom="@+id/textViewTimer"
+            android:layout_alignStart="@+id/textViewCity"
             android:text=""
             android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
@@ -50,9 +51,8 @@
             android:id="@+id/textViewWay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/textViewNumber"
-            android:layout_marginTop="12dp"
+            android:layout_alignStart="@+id/textViewNumber"
+            android:layout_below="@+id/textViewTimer"
             android:text=""
             android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
@@ -60,8 +60,8 @@
             android:id="@+id/textViewOtherinfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
+            android:layout_alignStart="@+id/textViewWay"
+            android:layout_below="@+id/textViewWay"
             android:text=""
             android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 

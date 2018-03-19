@@ -25,6 +25,19 @@ public class AdvancedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advanced);
 
+
+        //Back Button
+        Button backButton = findViewById(R.id.button4);
+        backButton.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+
+                startMainActivity();
+            }
+        });
+
+        //w
+
         final String deviceId2 = Settings.Secure.getString(this.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
 
@@ -100,6 +113,11 @@ public class AdvancedActivity extends AppCompatActivity {
     });
 
     }
+    public void startMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
 
 
 
